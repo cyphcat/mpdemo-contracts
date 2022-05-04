@@ -1,8 +1,18 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.5;
 
-contract TheMarketplace {
+import "wyvern-v3/contracts/exchange/Exchange.sol";
 
-    constructor() {
+contract TheMarketplace is Exchange {
+
+    constructor(uint chainId, address registry) {
+        DOMAIN_SEPARATOR = hash(EIP712Domain({
+            name: "The Marketplace",
+            version: "1.0",
+            chainId: chainId,
+            verifyingContract: address(this)
+        }));
+
+        registries[registry] = true;
     }
 }
