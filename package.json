@@ -28,6 +28,8 @@
   },
   "scripts": {
     "clean-compile": "hardhat clean && hardhat compile",
-    "compile": "hardhat compile"
+    "compile": "hardhat compile",
+    "node": "hardhat node",
+    "deploy": "hardhat --network localhost run scripts/deploy.ts"
   }
 }
