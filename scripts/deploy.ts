@@ -57,6 +57,12 @@ async function main() {
     fs.copyFileSync(
       path.resolve(artifactsDir, "wyvern-v3/contracts/StaticMarket.sol/StaticMarket.json"),
       path.resolve(exportDir, "artifacts/StaticMarket.json"));
+    fs.copyFileSync(
+      path.resolve(artifactsDir, "@openzeppelin/contracts/token/ERC20/IERC20.sol/IERC20.json"),
+      path.resolve(exportDir, "artifacts/IERC20.json"));
+    fs.copyFileSync(
+      path.resolve(artifactsDir, "@openzeppelin/contracts/token/ERC721/IERC721.sol/IERC721.json"),
+      path.resolve(exportDir, "artifacts/IERC721.json"));
   }
 }
 

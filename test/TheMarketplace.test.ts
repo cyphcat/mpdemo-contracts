@@ -130,7 +130,7 @@ describe("TheMarketplace", () => {
       staticExtradata: abi.encode(
         ["address[2]", "uint256[2]"],
         [[coin.address, nft.address], [tokenId, price]]),
-      maximumFill: price,
+      maximumFill: 1,
       listingTime: now,
       expirationTime: now + ONE_WEEK,
       salt: util.generateSalt(),
