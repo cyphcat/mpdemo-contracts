@@ -30,6 +30,7 @@
     "clean-compile": "hardhat clean && hardhat compile",
     "compile": "hardhat compile",
     "node": "hardhat node",
-    "deploy": "hardhat --network localhost run scripts/deploy.ts"
+    "deploy": "hardhat --network localhost run scripts/deploy.ts",
+    "deploy-ropsten": "hardhat --network ropsten run scripts/deploy.ts"
   }
 }

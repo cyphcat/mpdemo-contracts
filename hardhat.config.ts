@@ -22,6 +22,13 @@ const config: HardhatUserConfig = {
         }
       }
     ]
+  },
+  networks: {
+    ropsten: {
+      chainId: 3,
+      url: "https://ropsten.infura.io/v3/c1f4805e86154bab916a1a716f17489c",
+      accounts: [process.env.ROPSTEN_PRIVATE_KEY || ""],
+    }
   }
 };
 
