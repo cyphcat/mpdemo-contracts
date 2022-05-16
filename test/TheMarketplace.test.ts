@@ -37,14 +37,13 @@ describe("TheMarketplace", () => {
     const TheCoin = await ethers.getContractFactory("TheCoin");
     coin = await TheCoin.deploy();
     const TheNFT = await ethers.getContractFactory("TheNFT");
-    nft = await TheNFT.deploy();
+    nft = await TheNFT.deploy("http://localhost:8080/tokens/");
     const TheMarketplaceRegistry = await ethers.getContractFactory("TheMarketplaceRegistry");
     registry = await TheMarketplaceRegistry.deploy();
     const TheMarketplace = await ethers.getContractFactory("TheMarketplace");
     marketplace = await TheMarketplace.deploy(CHAIN_ID, registry.address);
     const StaticMarket = await ethers.getContractFactory("StaticMarket");
     staticMarket = await StaticMarket.deploy();
-
   }
 
   beforeEach(async () => {
@@ -68,8 +67,8 @@ describe("TheMarketplace", () => {
 
     // alice mints some nfts
     await nft.connect(alice).mint(2);
+    expect(await nft.ownerOf(0)).to.equal(alice.address);
     expect(await nft.ownerOf(1)).to.equal(alice.address);
-    expect(await nft.ownerOf(2)).to.equal(alice.address);
 
     // alice registers proxy
     await registry.connect(alice).registerProxy();

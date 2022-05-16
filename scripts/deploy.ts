@@ -3,14 +3,17 @@ import * as fs from "fs";
 import * as path from "path";
 
 async function main() {
+  console.log("deploying");
+
   const chainId = network.config.chainId || 31337;
+  const baseURI = "https://cypx-mpdemo.herokuapp.com/tokens/";
 
   const TheCoin = await ethers.getContractFactory("TheCoin");
   const coin = await TheCoin.deploy();
   await coin.deployed();
 
   const TheNFT = await ethers.getContractFactory("TheNFT");
-  const nft = await TheNFT.deploy();
+  const nft = await TheNFT.deploy(baseURI);
   await nft.deployed();
 
   const TheMarketplaceRegistry = await ethers.getContractFactory("TheMarketplaceRegistry");
@@ -34,7 +37,7 @@ async function main() {
     "TheMarketplace": marketplace.address,
     "StaticMarket": staticMarket.address,
   };
-  console.log(addresses);
+  console.log(chainId, addresses);
 
   const artifactsDir = path.resolve(__dirname, "../artifacts");
   const exportDir = path.resolve(process.env.FRONTEND_PROJECT_DIR!, "src/contracts");
@@ -63,6 +66,10 @@ async function main() {
     fs.copyFileSync(
       path.resolve(artifactsDir, "@openzeppelin/contracts/token/ERC721/IERC721.sol/IERC721.json"),
       path.resolve(exportDir, "artifacts/IERC721.json"));
+    fs.copyFileSync(
+      path.resolve(artifactsDir, "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol/IERC721Metadata.json"),
+      path.resolve(exportDir, "artifacts/IERC721Metadata.json"));
+    console.log("exported");
   }
 }
 
